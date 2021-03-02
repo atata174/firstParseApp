@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ytc-HG-xwS">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Random recipe-->
+        <scene sceneID="VKO-3v-KtN">
+            <objects>
+                <collectionViewController id="nBm-u1-hRJ" customClass="RandomViewController" customModule="firstParseApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="QwE-Kn-JF9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.59407583742733627" green="1" blue="0.70551379161311645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bQT-wD-nX0">
+                            <size key="itemSize" width="304" height="164"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="iNs-Tu-HtY">
+                                <rect key="frame" x="8" y="0.0" width="304" height="164"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="B4p-DS-ov5">
+                                    <rect key="frame" x="0.0" y="0.0" width="304" height="164"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="304" height="164"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="nBm-u1-hRJ" id="8dV-A1-pax"/>
+                            <outlet property="delegate" destination="nBm-u1-hRJ" id="S0Y-V4-AlN"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Random recipe" id="3sB-N5-5Uo"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDv-Hs-Fh2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2378" y="-146"/>
+        </scene>
+        <!--Ingredient-->
+        <scene sceneID="0f0-Hy-6jj">
+            <objects>
+                <viewController id="smS-Zh-6OB" customClass="IngredientViewController" customModule="firstParseApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yvL-qy-YMV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Psp-Bm-Jm9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Ingredient" id="HUk-RH-XCe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aLD-Eg-72h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2378" y="545"/>
+        </scene>
+        <!--The Fridge-->
+        <scene sceneID="y5D-UX-Zxl">
+            <objects>
+                <viewController id="SaG-4Q-cp2" customClass="MainViewController" customModule="firstParseApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SnJ-xQ-s0G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_background" translatesAutoresizingMaskIntoConstraints="NO" id="m6g-XL-ewQ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="R85-pi-C7G">
+                                <rect key="frame" x="16" y="230.5" width="288" height="107"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="0xk-rO-20r">
+                                        <rect key="frame" x="0.0" y="0.0" width="196" height="107"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Quantity recipes (&lt;10)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="soh-Ev-HEz">
+                                                <rect key="frame" x="0.0" y="0.0" width="196" height="34"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="search"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredient" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2w-1H-CIg">
+                                                <rect key="frame" x="0.0" y="73" width="196" height="34"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="2K9-qV-q53">
+                                        <rect key="frame" x="224" y="0.0" width="64" height="107"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOG-P1-UPO">
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="38"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Random">
+                                                    <color key="titleColor" systemColor="systemGreenColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsX-aX-UBY">
+                                                <rect key="frame" x="0.0" y="77" width="64" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="fBw-Na-x68"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="OK">
+                                                    <color key="titleColor" systemColor="systemGreenColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Pbt-wl-h9f"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="R85-pi-C7G" firstAttribute="centerY" secondItem="SnJ-xQ-s0G" secondAttribute="centerY" id="D3z-US-Wea"/>
+                            <constraint firstItem="m6g-XL-ewQ" firstAttribute="leading" secondItem="SnJ-xQ-s0G" secondAttribute="leading" id="E7r-hG-XTf"/>
+                            <constraint firstItem="R85-pi-C7G" firstAttribute="centerX" secondItem="SnJ-xQ-s0G" secondAttribute="centerX" id="H7G-Iw-ALu"/>
+                            <constraint firstItem="m6g-XL-ewQ" firstAttribute="top" secondItem="SnJ-xQ-s0G" secondAttribute="top" id="KGC-6t-R8I"/>
+                            <constraint firstItem="R85-pi-C7G" firstAttribute="leading" secondItem="Pbt-wl-h9f" secondAttribute="leading" constant="16" id="Mwa-ie-a6S"/>
+                            <constraint firstItem="m6g-XL-ewQ" firstAttribute="trailing" secondItem="SnJ-xQ-s0G" secondAttribute="trailing" id="Qq1-jp-LNH"/>
+                            <constraint firstAttribute="bottom" secondItem="m6g-XL-ewQ" secondAttribute="bottom" id="yWp-Vh-vN4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="The Fridge" leftItemsSupplementBackButton="YES" id="Mtq-u5-J9q"/>
+                    <connections>
+                        <outlet property="ingredientTF" destination="y2w-1H-CIg" id="sEZ-La-qSu"/>
+                        <outlet property="quantityRecipeTF" destination="soh-Ev-HEz" id="29d-07-UMB"/>
+                        <outlet property="randomButton" destination="IOG-P1-UPO" id="IgL-tQ-xsO"/>
+                        <segue destination="nBm-u1-hRJ" kind="show" identifier="randomRecipeSegue" id="wLs-iM-3S6"/>
+                        <segue destination="smS-Zh-6OB" kind="show" identifier="ingredientSegue" id="Kon-Po-hgV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6F1-Hy-MY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1398.5507246376812" y="95.758928571428569"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ca1-hE-b6N">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ytc-HG-xwS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3t3-cg-4ZZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SaG-4Q-cp2" kind="relationship" relationship="rootViewController" id="sfD-gT-BrK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jFQ-3n-n2b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="489.85507246376818" y="95.758928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="main_background" width="800" height="600"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
