@@ -9,3 +9,5 @@ enum URLExamples: String {
     case getRandomRecipe = "https://api.spoonacular.com/recipes/random"
     case getIngredient = "https://api.spoonacular.com/food/ingredients/search"
 }
+
+
