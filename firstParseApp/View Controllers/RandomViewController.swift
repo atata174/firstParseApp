@@ -11,12 +11,14 @@ private let reuseIdentifier = "cell"
 
 class RandomViewController: UICollectionViewController {
     
-    var countRandomRecipes = 0
-    var recipes: [RecipeRandom]!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
+    var countRandomRecipes: Int!
+    var recipe: Recipe?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(recipes.count)
+        print("randomVC \(String(describing: recipe))")
     }
 
 
@@ -27,26 +29,26 @@ class RandomViewController: UICollectionViewController {
 
     }
 
-
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        recipes.count
+        recipe?.recipes.count ?? 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? RecipeInfoCell else { return UICollectionViewCell() }
         
-        let userAction = recipes[indexPath.item]
-        cell.nameLabel.text = userAction.recipes[indexPath.item].title
-        
-    
+        cell.nameLabel.text = recipe?.recipes.first?.title
+        cell.configure(with: recipe)
+
         return cell
     }
     
-    
+    private func fetchImage() {
+        
+    }
 
-    // MARK: UICollectionViewDelegate
+    // MARK: - UICollectionViewDelegate
 
 
     /*
@@ -59,7 +61,9 @@ class RandomViewController: UICollectionViewController {
 }
 
 extension RandomViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width - 40, height: 200)
+
+        return CGSize(width: UIScreen.main.bounds.width - 48, height: 100)
     }
 }

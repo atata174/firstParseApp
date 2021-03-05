@@ -18,7 +18,7 @@ class RecipeInformationViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = recipe.title
-        fetchRecipeImage()
+//        fetchRecipeImage()
     }
     
     //MARK: - TableView Datasourse
@@ -35,29 +35,29 @@ class RecipeInformationViewController: UIViewController, UITableViewDataSource {
         let cell = UITableViewCell()
         let recipeCell = recipe.extendedIngredients[indexPath.row]
         var content = cell.defaultContentConfiguration()
-        content.text = recipeCell.name
+        content.text = recipeCell.originalName
         content.secondaryText = String(recipeCell.amount)
         
         return cell
     }
     
-    private func fetchRecipeImage(){
-        guard let imageURL = URL(string: "https://spoonacular.com/recipeImages/\(recipe.id)-240x150.jpg") else { return }
-        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            if let response = response {
-                print(response)
-            }
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
-            }
-        }.resume()
-    }
+//    private func fetchRecipeImage(){
+//        guard let imageURL = URL(string: "https://spoonacular.com/recipeImages/\(recipe.id)-240x150.jpg") else { return }
+//        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+//            if let error = error {
+//                print(error)
+//                return
+//            }
+//            if let response = response {
+//                print(response)
+//            }
+//            if let data = data, let image = UIImage(data: data) {
+//                DispatchQueue.main.async {
+//                    self.imageView.image = image
+//                }
+//            }
+//        }.resume()
+//    }
     
 
 }

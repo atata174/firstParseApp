@@ -6,14 +6,14 @@
 //
 
 struct Ingredient: Decodable {
-    let id: Int?
-    let name: String?
-    let image: String?
-    let categoryPath: [String]?
-    let estimatedCost: [EstimatedCost]?
+    let id: Int
+    let name: String
+    let image: String
+    let categoryPath: [String]
+    let estimatedCost: [EstimatedCost]
 }
 
 struct EstimatedCost: Decodable {
-    let value: Float?
-    let unit: String?
+    let value: String
+    let unit: String
 }

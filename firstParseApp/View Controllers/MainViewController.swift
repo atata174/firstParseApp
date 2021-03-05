@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     
     private let apiKey = "apiKey=9639391a2eab40f3b485bfe0c1196c51"
     
-    var recipes: [RecipeRandom] = []
+    var recipe: Recipe?
     var ingredient: Ingredient!
     
     override func viewDidLoad() {
@@ -32,6 +32,7 @@ class MainViewController: UIViewController {
                                                selector: #selector(showKeyboard(notification:)),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        
     }
     
 
@@ -40,20 +41,14 @@ class MainViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let randomVC = segue.destination as? RandomViewController else { return }
-        randomVC.recipes = recipes
-        randomVC.countRandomRecipes = recipes.count
+        randomVC.recipe = recipe
     }
     
     @IBAction func randomButtonAction() {
-        guard let count = quantityRecipeTF.text else { return }
-        if let doubleCount = Double(count){
-            if doubleCount > 0 && doubleCount < 11 {
-                getRandomRecipe(count: count)
-                performSegue(withIdentifier: "randomRecipeSegue", sender: nil)
-            }
-        } else {
-            errorAlert()
-        }
+        
+        fetchRecipe(from: "https://api.spoonacular.com/recipes/random?\(apiKey)")
+        
+        performSegue(withIdentifier: "randomRecipeSegue", sender: nil)
         
     }
     
@@ -65,45 +60,22 @@ class MainViewController: UIViewController {
         } else {
             errorAlert()
         }
-        
-
-    }
-    private func getRandomRecipe(count: String) {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/random?number=\(count)&\(apiKey)") else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            if let _ = response {
-                print("response")
-            }
-            guard let data = data else { return}
-            
-            do {
-                let recipeRandomFetch = try JSONDecoder().decode(RecipeRandom.self, from: data)
-
-                self.recipes.append(recipeRandomFetch)
-                
-                DispatchQueue.main.async {
-                    self.successAlert()
-                }
-            } catch let error {
-                print(error)
-                DispatchQueue.main.async {
-                    self.errorAlert()
-                }
-            }
-        }.resume()
     }
     
-    private func searchIngridient() {
-        print("ingredient")
-    }
     
 
+    private func getRandomRecipe(count: String) {}
+    
+    private func searchIngridient() {}
+    
+    private func fetchRecipe(from url: String?) {
+        NetworkManager.shared.fetchRecipe(from: url) { recipe in
+            self.recipe = recipe
+        }
+    }
 }
+
+// MARK: - Methods for working with the keyboard
 
 extension MainViewController: UITextFieldDelegate {
     
@@ -147,8 +119,6 @@ extension MainViewController: UITextFieldDelegate {
         view.frame.origin.y = 0
     }
     
-    
-    
     // hardcoding... sorry
     
     @objc func showKeyboard (notification: Notification) {
@@ -160,6 +130,8 @@ extension MainViewController: UITextFieldDelegate {
         }
     }
 }
+
+// MARK: - Alert Controllers
 
 extension MainViewController {
     private func successAlert() {
