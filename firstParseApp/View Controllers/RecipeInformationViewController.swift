@@ -18,7 +18,6 @@ class RecipeInformationViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = recipe.title
-//        fetchRecipeImage()
     }
     
     //MARK: - TableView Datasourse
@@ -40,28 +39,4 @@ class RecipeInformationViewController: UIViewController, UITableViewDataSource {
         
         return cell
     }
-    
-//    private func fetchRecipeImage(){
-//        guard let imageURL = URL(string: "https://spoonacular.com/recipeImages/\(recipe.id)-240x150.jpg") else { return }
-//        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-//            if let error = error {
-//                print(error)
-//                return
-//            }
-//            if let response = response {
-//                print(response)
-//            }
-//            if let data = data, let image = UIImage(data: data) {
-//                DispatchQueue.main.async {
-//                    self.imageView.image = image
-//                }
-//            }
-//        }.resume()
-//    }
-    
-
-}
-
-extension RecipeInformationViewController: UICollectionViewDelegate {
-    
 }

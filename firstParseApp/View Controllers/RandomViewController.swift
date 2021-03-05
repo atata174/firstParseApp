@@ -16,12 +16,6 @@ class RandomViewController: UICollectionViewController {
     var countRandomRecipes: Int!
     var recipe: Recipe?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("randomVC \(String(describing: recipe))")
-    }
-
-
     // MARK: - Navigation
 
 
@@ -47,17 +41,6 @@ class RandomViewController: UICollectionViewController {
     private func fetchImage() {
         
     }
-
-    // MARK: - UICollectionViewDelegate
-
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
 }
 
 extension RandomViewController: UICollectionViewDelegateFlowLayout {

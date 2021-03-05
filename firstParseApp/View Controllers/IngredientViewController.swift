@@ -13,5 +13,4 @@ class IngredientViewController: UIViewController {
         super.viewDidLoad()
 
     }
-
 }
