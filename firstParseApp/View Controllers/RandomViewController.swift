@@ -20,7 +20,8 @@ class RandomViewController: UICollectionViewController {
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        guard let recipeInfoVC = segue.destination as? RecipeInformationViewController else { return }
+        recipeInfoVC.recipe = recipe
     }
 
     // MARK: - UICollectionViewDataSource
@@ -38,6 +39,14 @@ class RandomViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if recipe != nil {
+            performSegue(withIdentifier: "recipeInfo", sender: nil)
+        } else {
+            errorAlert()
+        }
+    }
+    
     private func fetchImage() {
         
     }
@@ -50,3 +59,27 @@ extension RandomViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: UIScreen.main.bounds.width - 48, height: 100)
     }
 }
+
+extension RandomViewController {
+    
+    private func successAlert() {
+        let alert = UIAlertController(title: "Success",
+                                      message: "Success",
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
+    private func errorAlert() {
+        let alert = UIAlertController(title: "Error",
+                                      message: "Error",
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+}
+
