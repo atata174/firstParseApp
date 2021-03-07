@@ -6,11 +6,7 @@
 //
 
 import Foundation
-
-enum URLExamples: String {
-    case getRandomRecipe = "https://api.spoonacular.com/recipes/random"
-    case getIngredient = "https://api.spoonacular.com/food/ingredients/search"
-}
+import Alamofire
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -21,8 +17,6 @@ class NetworkManager {
         
         guard let stringURL = url else { return }
         guard let url = URL(string: stringURL) else { return }
-        
-        print(url)
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
@@ -42,17 +36,44 @@ class NetworkManager {
             }
         }.resume()
     }
-}
-
-class ImageManager {
-    static var shared = ImageManager()
     
-    private init() {}
-    
-    func fetchImage(from url: String?) -> Data? {
-        guard let stringURL = url else { return nil }
-        guard let imageURL = URL(string: stringURL) else { return nil}
-        return try? Data(contentsOf: imageURL)
+    func fetchRecipeDetail(from url: String?, with complition: @escaping (RecipeInfo) -> ()){
+        
+        guard let stringURL = url else { return }
+        guard let url = URL(string: stringURL) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                let recipeInfo = try JSONDecoder().decode(RecipeInfo.self, from: data)
+                DispatchQueue.main.async {
+                    complition(recipeInfo)
+                }
+            } catch {
+                print(error)
+            }
+        }.resume()
     }
     
+    func alamofireFetchRecipe(from url: String?, with complition: @escaping (Recipe) -> ()) {
+        guard let stringURL = url else { return }
+        guard let url = URL(string: stringURL) else { return }
+        
+        AF.request(url)
+            .responseDecodable(of: Recipe.self) { responseData in
+                switch responseData.result {
+                case .success(let value):
+                    complition(value)
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
+
 }

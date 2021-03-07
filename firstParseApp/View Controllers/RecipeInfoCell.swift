@@ -15,10 +15,10 @@ class RecipeInfoCell: UICollectionViewCell {
     
     private let apiKey = "?apiKey=9639391a2eab40f3b485bfe0c1196c51"
     
-    func configure(with recipe: Recipe?) {
-        nameLabel.text = recipe?.recipes.first?.title
+    func configure(with recipe: RecipeInfo?) {
+        nameLabel.text = recipe?.title
         DispatchQueue.global().async {
-            guard let stringUrl = recipe?.recipes.first?.image else { return }
+            guard let stringUrl = recipe?.image else { return }
             guard let imageUrl = URL(string: stringUrl + self.apiKey) else { return }
             guard let imageData = try? Data(contentsOf: imageUrl) else { return }
             DispatchQueue.main.async {

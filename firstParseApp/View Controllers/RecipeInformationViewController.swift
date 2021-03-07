@@ -7,67 +7,40 @@
 
 import UIKit
 
-class RecipeInformationViewController: UIViewController, UITableViewDataSource, UIScrollViewDelegate, UITableViewDelegate {
+class RecipeInformationViewController: UIViewController {
     
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var tableView: UITableView!
-    
-    @IBOutlet var imageView: UIImageView!
-    
-    @IBOutlet var nameLabel: UILabel!
-    
-    let screenHeight = UIScreen.main.bounds.height
-    let scrollViewContentHeight = 1200 as CGFloat
-    var recipe: Recipe!
-    let scrollViewContentWidth = CGFloat(UIScreen.main.bounds.width)
+    var recipe: RecipeInfo?
+
+    @IBOutlet var imageRecipe: UIImageView!
+    @IBOutlet var recipeDetailLabel: UILabel!
+    @IBOutlet var ingredientsLabel: UILabel!
+    private var fullIngredients = ""
+    private let apiKey = "?apiKey=9639391a2eab40f3b485bfe0c1196c51"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = recipe.recipes.first?.title ?? "Recipe Info"
         
-//        scrollView.contentSize = CGSizeMake(scrollViewContentWidth, scrollViewContentHeight)
-        scrollView.delegate = self
-        tableView.delegate = self
-        scrollView.bounces = false
-        tableView.bounces = false
-        tableView.isScrollEnabled = true
-        scrollView.isScrollEnabled = true
-    }
-    
-    //MARK: - TableView Datasourse
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "Ingredients"
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recipe.recipes.first?.extendedIngredients.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RecipeInfoTableViewCell
+        recipeDetailLabel.text = recipe?.description
+        guard let count = recipe?.extendedIngredients.count else { return }
+        guard let ingredient = recipe?.extendedIngredients else { return }
         
-        let recipeCell = recipe.recipes.first?.extendedIngredients[indexPath.row]
-        cell?.descriptionLabel.text = recipeCell?.description
-        
-        return cell ?? UITableViewCell()
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
-
-        if scrollView == self.scrollView {
-            if yOffset >= scrollViewContentHeight - screenHeight {
-                scrollView.isScrollEnabled = false
-                tableView.isScrollEnabled = true
-            }
+        for element in 0..<count {
+            fullIngredients += "\(ingredient[element].description) \n"
         }
-
-        if scrollView == self.tableView {
-            if yOffset <= 0 {
-                self.scrollView.isScrollEnabled = true
-                self.tableView.isScrollEnabled = false
+        
+        ingredientsLabel.text = fullIngredients
+        configure(with: recipe)
+    }
+    
+    func configure(with recipe: RecipeInfo?) {
+        DispatchQueue.global().async {
+            guard let stringUrl = recipe?.image else { return }
+            guard let imageUrl = URL(string: stringUrl + self.apiKey) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.imageRecipe.image = UIImage(data: imageData)
             }
         }
     }
+    
 }

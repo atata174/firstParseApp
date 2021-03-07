@@ -34,7 +34,7 @@ struct extendedIngredient: Decodable {
     
     var description: String {
         """
-        \(originalName) - \(amount)\(unit)
+        \(originalName) - \(amount) \(unit)
         """
     }
 }

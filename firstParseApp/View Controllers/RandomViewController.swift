@@ -10,14 +10,10 @@ import UIKit
 private let reuseIdentifier = "cell"
 
 class RandomViewController: UICollectionViewController {
-    
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    
-    var countRandomRecipes: Int!
-    var recipe: Recipe?
+
+    var recipe: RecipeInfo?
 
     // MARK: - Navigation
-
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let recipeInfoVC = segue.destination as? RecipeInformationViewController else { return }
@@ -27,13 +23,13 @@ class RandomViewController: UICollectionViewController {
     // MARK: - UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        recipe?.recipes.count ?? 1
+        1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? RecipeInfoCell else { return UICollectionViewCell() }
         
-        cell.nameLabel.text = recipe?.recipes.first?.title
+        cell.nameLabel.text = recipe?.title
         cell.configure(with: recipe)
 
         return cell
@@ -43,12 +39,8 @@ class RandomViewController: UICollectionViewController {
         if recipe != nil {
             performSegue(withIdentifier: "recipeInfo", sender: nil)
         } else {
-            errorAlert()
+            errorAlert(message: "No recipe")
         }
-    }
-    
-    private func fetchImage() {
-        
     }
 }
 
@@ -60,11 +52,13 @@ extension RandomViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - AlertControllers
+
 extension RandomViewController {
     
-    private func successAlert() {
+    private func successAlert(message: String) {
         let alert = UIAlertController(title: "Success",
-                                      message: "Success",
+                                      message: message,
                                       preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default)
@@ -72,9 +66,9 @@ extension RandomViewController {
         present(alert, animated: true)
     }
     
-    private func errorAlert() {
+    private func errorAlert(message: String) {
         let alert = UIAlertController(title: "Error",
-                                      message: "Error",
+                                      message: message,
                                       preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default)
